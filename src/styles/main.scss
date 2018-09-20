@@ -1,0 +1,38 @@
+$baseColor: #eee;
+$fadeBase: rgba($baseColor, 0.2);
+$darkenBase: darken($baseColor, 20%);
+$desktop: 'only screen and (min-width : 993px)';
+$tablet: 'only screen and (min-width:601px) and (max-width:992px)';
+$mobile: 'only screen and (min-width:50px) and (max-width:600px)';
+
+.rs-content-body {
+  background-color: #ccc;
+  position: relative;
+  top: 110px;
+}
+
+@mixin clear-fix() {
+  &:after {
+   clear: both;
+   content: '';
+   display: table;
+ }
+
+ &:before {
+   clear: both;
+   content: '';
+   display: table;
+ }
+}
+
+@media #{$mobile} {
+  // mobile rules
+}
+
+@media #{$tablet} {
+ // tablet rules
+}
+
+@media #{$desktop} {
+  // desktop ru
+}

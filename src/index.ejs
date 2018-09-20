@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% var env, path = '', script = 'js/app.min.js';%>
+    <% if (env === 'dev') { path = 'dist/'; script = 'dist/js/app.js'; } %>
+    <meta charset="utf-8">
+    <title>Rackspace Sign Up</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
+    <link href="<%- path %>zoolander/css/derek.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<%- path %>css/main.min.css">
+  </head>
+  <body>
+      <% include partials/header %>
+      <div class="rs-content-body">
+        <div class="rs-signup-container">
+          Some content
+        </div>
+        <% include partials/footer %>
+      </div>
+      <script src="<%- path %>js/modules/jquery.min.js"></script>
+      <script src="https://www.rackspace.com/themes/custom/rackspace/libraries/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+      <script src="https://www.rackspace.com/themes/custom/rackspace/js/jquery-plugins/bootstrap-tabcollapse.js"></script>
+      <script src="<%- path %>zoolander/js/global.js"></script>
+      <script src="<%- path %>zoolander/js/global-components/mainnav/mainnav.js"></script>
+      <script src="<%- path %>zoolander/js/global-components/footer/footer.js"></script>
+      <script src="<%- script %>" charset="utf-8"></script>
+  </body>
+</html>
