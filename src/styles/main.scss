@@ -1,38 +1,17 @@
-$baseColor: #eee;
-$fadeBase: rgba($baseColor, 0.2);
-$darkenBase: darken($baseColor, 20%);
-$desktop: 'only screen and (min-width : 993px)';
-$tablet: 'only screen and (min-width:601px) and (max-width:992px)';
-$mobile: 'only screen and (min-width:50px) and (max-width:600px)';
+@import 'variables';
+@import 'mixins';
+@import 'multi-step';
 
 .rs-content-body {
-  background-color: #ccc;
   position: relative;
   top: 110px;
 }
 
-@mixin clear-fix() {
-  &:after {
-   clear: both;
-   content: '';
-   display: table;
- }
-
- &:before {
-   clear: both;
-   content: '';
-   display: table;
- }
+.rs-content-container {
+  padding: 45px 0;
 }
 
-@media #{$mobile} {
-  // mobile rules
-}
-
-@media #{$tablet} {
- // tablet rules
-}
-
-@media #{$desktop} {
-  // desktop ru
+// js helpers
+.position-absolute {
+  position: absolute;
 }

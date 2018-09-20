@@ -155,6 +155,7 @@ const buildEjs = function buildEjs() {
 const buildDist = function buildDist() {
   return fse.emptyDir('./dist')
   .then(() => {
+    getZoolander();
     buildEjs();
     sassTask();
     jsTask();

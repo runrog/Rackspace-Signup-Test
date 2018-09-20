@@ -1,0 +1,65 @@
+.rsMultiStep-progress {
+  @include clear-fix;
+  text-align: center;
+}
+
+.rsMultiStep-progressStep {
+  display: inline-block;
+  margin-right: 50px;
+  text-align: center;
+
+  @media #{$mobile} {
+    margin-bottom: 10px;
+  }
+}
+
+.rsMultiStep-progressStep-num {
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: inline-block;
+  height: 40px;
+  margin-right: 10px;
+  padding: 5px;
+  width: 40px;
+}
+
+.rsMultiStep-progressStep-numActive {
+  background-color: $baseColor;
+  border: 2px solid $baseColor;
+  color: white;
+}
+
+.rsMultiStep {
+  display: block;
+  min-height: 1px;
+}
+
+.rsMultiStep-step {
+  // .off-white-bg;
+  display: none;
+  padding: 10px;
+}
+
+.rsMultiStep-stepActive {
+  display: block;
+}
+
+.rsMultiStep-btnRow {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.rsMultiStep-nextBtn {
+  // .rsBtn;
+  background-color: black;
+  margin-bottom: 0;
+  margin-right: 15px;
+}
+
+.rsMultiStep-backBtn {
+  // .rsBtn;
+  background-color: black;
+  margin-bottom: 0;
+  margin-right: 15px;
+}
