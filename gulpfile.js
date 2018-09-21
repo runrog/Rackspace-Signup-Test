@@ -39,6 +39,10 @@ const buildNodeModules = function buildIcons() {
       module: './node_modules/jquery/dist/jquery.min.js',
       dest: './dist/js/modules/',
     },
+    {
+      module: './node_modules/inputmask/dist/jquery.inputmask.bundle.js',
+      dest: './dist/js/modules/',
+    },
   ];
   fse.ensureDir('./dist/js/modules')
     .then(() => {

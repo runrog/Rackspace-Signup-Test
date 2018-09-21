@@ -70,19 +70,19 @@
                   <div class="rsForm-col-6">
                     <div class="rsForm-fieldContainer">
                       <label class="rsForm-fieldLabel">Credit Card Number</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      <input class="rsForm-inputText" data-inputmask="'mask': '9999 9999 9999 9999'" data-validate='{ "required": true }' type="text">
                     </div>
                     <div class="rsForm-row">
                       <div class="rsForm-col-9">
                         <div class="rsForm-fieldContainer">
                           <label class="rsForm-fieldLabel">Card Expiration</label>
-                          <input class="rsForm-inputText" placeholder="mm / yy" data-validate='{ "required": true }' type="text">
+                          <input class="rsForm-inputText" data-inputmask="'mask': '99 / 99'" placeholder="mm / yy" data-validate='{ "required": true }' type="text">
                         </div>
                       </div>
                       <div class="rsForm-col-3">
                         <div class="rsForm-fieldContainer">
                           <label class="rsForm-fieldLabel">CVV</label>
-                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                          <input class="rsForm-inputText" data-inputmask="'mask': '999'" data-validate='{ "required": true }' type="text">
                         </div>
                       </div>
                     </div>
@@ -100,7 +100,7 @@
                       <div class="rsForm-col-3">
                         <div class="rsForm-fieldContainer">
                           <label class="rsForm-fieldLabel">State</label>
-                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                          <input class="rsForm-inputText" data-inputmask="'mask': 'AA'" data-validate='{ "required": true }' type="text">
                         </div>
                       </div>
                     </div>
@@ -108,7 +108,7 @@
                       <div class="rsForm-col-6">
                         <div class="rsForm-fieldContainer">
                           <label class="rsForm-fieldLabel">Zip Code</label>
-                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                          <input class="rsForm-inputText" data-inputmask="'mask': '99999'" data-validate='{ "required": true }' type="text">
                         </div>
                       </div>
                     </div>
@@ -136,6 +136,7 @@
         <% include partials/footer %>
       </div>
       <script src="<%- path %>js/modules/jquery.min.js"></script>
+      <script src="<%- path %>js/modules/jquery.inputmask.bundle.js"></script>
       <script src="https://www.rackspace.com/themes/custom/rackspace/libraries/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
       <script src="https://www.rackspace.com/themes/custom/rackspace/js/jquery-plugins/bootstrap-tabcollapse.js"></script>
       <script src="<%- path %>zoolander/js/global.js"></script>
@@ -147,6 +148,7 @@
           form: true,
           validate: true,
         });
+        $(":input").inputmask();
       </script>
   </body>
 </html>
