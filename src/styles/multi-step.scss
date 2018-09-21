@@ -15,8 +15,9 @@
 
 .rsMultiStep-progressStep-num {
   background-color: transparent;
-  border: 2px solid black;
+  border: 2px solid #cecece;
   border-radius: 50%;
+  color: rgba($black, 0.6);
   display: inline-block;
   height: 40px;
   margin-right: 10px;
@@ -31,12 +32,15 @@
 }
 
 .rsMultiStep {
+  @include clear-fix;
   display: block;
   min-height: 1px;
+  padding-top: 35px;
 }
 
 .rsMultiStep-step {
-  // .off-white-bg;
+  @include box-shadow;
+  background-color: $off-white;
   display: none;
   padding: 10px;
 }
@@ -46,20 +50,23 @@
 }
 
 .rsMultiStep-btnRow {
+  @include clear-fix;
   margin-bottom: 0;
+  padding: 20px 0 0;
   text-align: center;
 }
 
 .rsMultiStep-nextBtn {
-  // .rsBtn;
-  background-color: black;
-  margin-bottom: 0;
-  margin-right: 15px;
+  @include large-btn($secondary-blue);
+  float: right;
 }
 
 .rsMultiStep-backBtn {
-  // .rsBtn;
-  background-color: black;
-  margin-bottom: 0;
-  margin-right: 15px;
+  @include large-btn($secondary-blue);
+  float: left;
+}
+
+.rsMultiStep-validation-message {
+  color: $danger-red;
+  font-size: 11pt;
 }

@@ -1,6 +1,11 @@
 $baseColor: #c40022;
+$black: #000000;
+$white: #ffffff;
+$off-white: #f3f3f3;
 $fadeBase: rgba($baseColor, 0.2);
 $darkenBase: darken($baseColor, 20%);
+$danger-red: #e42626;
+$secondary-blue: #0c808c;
 $desktop: 'only screen and (min-width : 993px)';
 $tablet: 'only screen and (min-width:601px) and (max-width:992px)';
 $mobile: 'only screen and (min-width:50px) and (max-width:600px)';

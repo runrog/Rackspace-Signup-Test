@@ -9,32 +9,47 @@
     };
     const options = $.extend({}, defaults, opts);
 
-    const validation = {
-      checkRequired($input) {
-        // console.log('input: ', $input.val());
-      },
-      passed($field) {
-        const failed = [];
-        $field.find('input').each(function check() {
-          const $input = $(this);
-          const attr = $input.attr('data-validate');
-          if (attr) {
-            const settings = JSON.parse(attr);
-            if (settings.required) {
-              validation.checkRequired($input);
-            }
-          }
-        });
-        // return failed.length < 1;
-        return false;
-      },
-    };
-
     const $multiStep = $(this);
     $multiStep.find('.rsMultiStep-step').each(function runSteps() {
       const $this = $(this);
       const indexNum = $this.index() + 1;
       const $stepLabel = $this.attr('data-step-label');
+      let totalCost = 0;
+
+      const validation = {
+        totalQuantity: 0,
+        checkRequired($input) {
+          return {
+            passed: $input.val().trim() !== '',
+          };
+        },
+        passed($field) {
+          const failed = [];
+          $field.find('input').each(function check() {
+            const $input = $(this);
+            // check for validation message containers
+            let $msgEl = $input.next('.rsMultiStep-validation-message');
+            if ($msgEl.length > 0) {
+              // msg container is there so we need to empty it.
+              $msgEl.html('');
+            } else {
+              // msg container not there yet so inject it
+              $msgEl = $('<div class="rsMultiStep-validation-message"></div>');
+              $msgEl.insertAfter($input);
+            }
+            // check for what to even validate
+            const attr = $input.attr('data-validate');
+            if (attr) {
+              const settings = JSON.parse(attr);
+              if (settings.required && !validation.checkRequired($input).passed) {
+                failed.push('This value is required');
+                $msgEl.html('This value is required!');
+              }
+            }
+          });
+          return failed.length < 1;
+        },
+      };
 
       $this.parent().prev('.rsMultiStep-progress')
                     .append(`<span class="rsMultiStep-progressStep rsMultiStep-progressStep${indexNum}">
