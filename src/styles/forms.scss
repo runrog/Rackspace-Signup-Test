@@ -1,0 +1,69 @@
+.rsForm-fieldContainer {
+  margin-bottom: 15px;
+  padding: 5px 0;
+  position: relative;
+}
+
+.rsForm-fieldLabel {
+  display: inline-block;
+  width: 100%;
+}
+
+.rsForm-inputText {
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  transition-duration: .2s;
+  width: 100%;
+  
+  &:focus {
+    border-color: $secondary-blue;
+    outline: 0;
+  }
+
+  @media #{$mobile} {
+    width: 100%;
+  }
+  
+  @media #{$tablet} {
+    width: 100%;
+  }
+}
+.rsForm-inputHint {
+  color: rgba($black, .5);
+  position: absolute;
+  right: -70px;
+  top: 46px;
+  
+  &:before {
+    content: 'x';
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  @media #{$mobile} {
+    display: none;
+  }
+  
+  @media #{$tablet} {
+    display: none;
+  }
+}
+
+.rsForm-row {
+  @include clear-fix;
+}
+
+.rsForm-col-6 {
+  @include column(50%);
+}
+
+.rsForm-col-9 {
+  @include column(75%);
+}
+
+.rsForm-col-3 {
+  @include column(25%);
+}
+

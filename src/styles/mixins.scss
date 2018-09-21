@@ -33,3 +33,20 @@
     outline: 0;
   }
 }
+
+@mixin column($w) {
+  @include clear-fix;
+  float: left;
+  padding-right: 5px;
+  width: $w;
+  
+  @media #{$mobile} {
+    padding-right: 0;
+    width: 100%;
+  }
+  
+  @media #{$tablet} {
+    padding-right: 0;
+    width: 100%;
+  }
+}

@@ -8,25 +8,73 @@
       validate: false,
     };
     const options = $.extend({}, defaults, opts);
+    const $cost = $('.rsSignup-cost');
+    const $boxes = $('.rsSignup-boxes');
+    const $globalErrors = $('.rsForm-global-errors');
+    let totalCost = 0;
+    let totalQuantity = 0;
+
+    const methods = {
+      addBoxes($step) {
+        totalQuantity = 0;
+        totalCost = 0;
+        $step.find('[name="rs-add-quantity"]').each(function input() {
+          const pennies = parseInt($(this).attr('data-cost'), 10);
+          const val = parseInt($(this).val(), 10);
+          if (val >= 0) {
+            totalCost += (pennies * val);
+            totalQuantity += val;
+          }
+        });
+        if (totalQuantity >= 0) {
+          $boxes.html(totalQuantity);
+          $cost.html(methods.convertToDollars(totalCost));
+        }
+      },
+      convertToDollars(pennies) {
+        const dollars = pennies / 100;
+        return dollars.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'USD',
+        });
+      },
+    };
 
     const $multiStep = $(this);
     $multiStep.find('.rsMultiStep-step').each(function runSteps() {
       const $this = $(this);
       const indexNum = $this.index() + 1;
       const $stepLabel = $this.attr('data-step-label');
-      let totalCost = 0;
 
       const validation = {
-        totalQuantity: 0,
         checkRequired($input) {
           return {
             passed: $input.val().trim() !== '',
           };
         },
+        checkMinVal($input, min) {
+          return {
+            passed: parseInt($input.val(), 10) >= parseInt(min, 10),
+          };
+        },
+        checkMaxVal($input, max) {
+          return {
+            passed: parseInt($input.val(), 10) <= parseInt(max, 10),
+          };
+        },
+        checkType($input, type) {
+          const types = {
+            email: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi,
+          };
+          return {
+            passed: $input.val().match(types[type]),
+          };
+        },
         passed($field) {
-          const failed = [];
+          const totalFailed = [];
           $field.find('input').each(function check() {
             const $input = $(this);
+            const inputFailed = [];
             // check for validation message containers
             let $msgEl = $input.next('.rsMultiStep-validation-message');
             if ($msgEl.length > 0) {
@@ -41,13 +89,35 @@
             const attr = $input.attr('data-validate');
             if (attr) {
               const settings = JSON.parse(attr);
+              // check required
               if (settings.required && !validation.checkRequired($input).passed) {
-                failed.push('This value is required');
-                $msgEl.html('This value is required!');
+                const msg = 'This value is required';
+                totalFailed.push(msg);
+                inputFailed.push(msg);
               }
+              // check min values
+              if (!isNaN(settings.min) && !validation.checkMinVal($input, settings.min).passed) {
+                const msg = `This value must be at least ${settings.min}`;
+                totalFailed.push(msg);
+                inputFailed.push(msg);
+              }
+              // check max values
+              if (!isNaN(settings.max) && !validation.checkMaxVal($input, settings.max).passed) {
+                const msg = `This value must not exceed ${settings.max}`;
+                totalFailed.push(msg);
+                inputFailed.push(msg);
+              }
+              // check for types to validate
+              if (settings.type && !validation.checkType($input, settings.type).passed) {
+                const msg = `This value must have a valid ${settings.type} format`;
+                totalFailed.push(msg);
+                inputFailed.push(msg);
+              }
+              // show all errors
+              $msgEl.html(inputFailed.join('. '));
             }
           });
-          return failed.length < 1;
+          return totalFailed.length < 1;
         },
       };
 
@@ -84,17 +154,29 @@
         $msRow.prepend($backBtn);
       }
 
+      // bind keyup events to quantity type inputs so we can show totals
+      $this.find('[name="rs-add-quantity"]').each(function input() {
+        $(this).on('keyup', () => methods.addBoxes($this));
+      });
+
       // next click event
       $this.find('.rsMultiStep-nextBtn').click((e) => {
         if (!$this.is(':animated')) {
           e.preventDefault();
-          // check for form validation
-          const passed = validation.passed($this);
-          if (options.form && options.validate && !passed) {
-            // TODO show all error messages
+
+          // don't change steps unless validation passes
+          if (options.form && options.validate && !validation.passed($this)) {
             return;
           }
 
+          // check that at least 1 email box is checked before proceeding
+          $globalErrors.hide();
+          if (totalQuantity <= 0) {
+            $globalErrors.show().html('You must have at least 1 mail box to proceed.');
+            return;
+          }
+
+          // swap to next step
           $this.css('height', $this.outerHeight());
           $this.css('width', $this.outerWidth());
           $this.addClass('position-absolute');

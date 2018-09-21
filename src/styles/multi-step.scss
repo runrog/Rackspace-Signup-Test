@@ -42,7 +42,7 @@
   @include box-shadow;
   background-color: $off-white;
   display: none;
-  padding: 10px;
+  padding: 30px;
 }
 
 .rsMultiStep-stepActive {
@@ -69,4 +69,18 @@
 .rsMultiStep-validation-message {
   color: $danger-red;
   font-size: 11pt;
+}
+
+.rsSignup-total {
+  border-top: 1px solid rgba($black, .2);
+  color: rgba($black, .75);
+  font-size: 16pt;
+  margin-top: 20px;
+  text-align: right;
+}
+
+.rsSignup-total-divider {
+  color: rgba($black, .2);
+  display: inline-block;
+  margin: 0 10px;
 }

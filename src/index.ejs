@@ -19,15 +19,33 @@
             <form class="full-width rsForm">
               <div class="rsMultiStep-progress"></div>
               <div class="rsMultiStep">
-                <div class="rsMultiStep-step" data-step-label="Email Boxes">
-                  <div class="rsForm-fieldContainer">
-                    <label class="rsForm-fieldLabel">Step 1 input</label>
-                    <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                <div class="rsMultiStep-step" data-step-label="Choose Products">
+                  <h3>Add Your Mailboxes</h3>
+                  <div class="rsForm-row">
+                    <div class="rsForm-col-6">
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Rackspace Email</label>
+                        <span class="rsForm-inputHint">$2.00</span>
+                        <input class="rsForm-inputText" name="rs-add-quantity" data-cost="200" data-validate='{ "min": 0, "max": 50 }' type="number" value="0">
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Rackspace Email Plus</label>
+                        <span class="rsForm-inputHint">$3.50</span>
+                        <input class="rsForm-inputText" name="rs-add-quantity" data-cost="350" data-validate='{ "min": 0, "max": 50 }' type="number" value="0">
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Microsoft Exchange</label>
+                        <span class="rsForm-inputHint">$7.99</span>
+                        <input class="rsForm-inputText" name="rs-add-quantity" data-cost="799" data-validate='{ "min": 0, "max": 50 }' type="number" value="0">
+                      </div>
+                    </div>
+                    <div class="rsForm-col-6"></div>
                   </div>
+                  <div class="rsForm-global-errors rsMultiStep-validation-message"></div>
                   <div class="rsMultiStep-btnRow"></div>
                 </div>
-                <div class="rsMultiStep-step" data-step-label="Step 2">
-                  <div class="col-md-6">
+                <div class="rsMultiStep-step" data-step-label="Your Information">
+                  <div class="rsForm-col-6">
                     <div class="rsForm-fieldContainer">
                       <label class="rsForm-fieldLabel">First Name</label>
                       <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
@@ -38,57 +56,80 @@
                     </div>
                     <div class="rsForm-fieldContainer">
                       <label class="rsForm-fieldLabel">Email</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      <input class="rsForm-inputText" data-validate='{ "required": true, "type": "email" }' type="text">
                     </div>
                     <div class="rsForm-fieldContainer">
                       <label class="rsForm-fieldLabel">Password</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="password">
                     </div>
                     <div class="rsForm-fieldContainer">
                       <label class="rsForm-fieldLabel">Confirm Password</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="password">
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="rsForm-col-6">
                     <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">First Name</label>
+                      <label class="rsForm-fieldLabel">Credit Card Number</label>
                       <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
                     </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Last Name</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                    <div class="rsForm-row">
+                      <div class="rsForm-col-9">
+                        <div class="rsForm-fieldContainer">
+                          <label class="rsForm-fieldLabel">Card Expiration</label>
+                          <input class="rsForm-inputText" placeholder="mm / yy" data-validate='{ "required": true }' type="text">
+                        </div>
+                      </div>
+                      <div class="rsForm-col-3">
+                        <div class="rsForm-fieldContainer">
+                          <label class="rsForm-fieldLabel">CVV</label>
+                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                        </div>
+                      </div>
                     </div>
                     <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Email</label>
+                      <label class="rsForm-fieldLabel">Billing Address</label>
                       <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
                     </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Password</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                    <div class="rsForm-row">
+                      <div class="rsForm-col-9">
+                        <div class="rsForm-fieldContainer">
+                          <label class="rsForm-fieldLabel">City</label>
+                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                        </div>
+                      </div>
+                      <div class="rsForm-col-3">
+                        <div class="rsForm-fieldContainer">
+                          <label class="rsForm-fieldLabel">State</label>
+                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                        </div>
+                      </div>
                     </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Confirm Password</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                    <div class="rsForm-row">
+                      <div class="rsForm-col-6">
+                        <div class="rsForm-fieldContainer">
+                          <label class="rsForm-fieldLabel">Zip Code</label>
+                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="rsMultiStep-btnRow"></div>
                 </div>
-                <div class="rsMultiStep-step" data-step-label="Step 3">
+                <div class="rsMultiStep-step" data-step-label="Confirmation">
                   <div class="rsForm-fieldContainer">
                     <label class="rsForm-fieldLabel">Step 3 input</label>
                     <input class="rsForm-inputText" type="text">
                   </div>
                   <div class="rsMultiStep-btnRow"></div>
                 </div>
-                <div class="rsMultiStep-step" data-step-label="Step 4">
-                  <div class="rsForm-fieldContainer">
-                    <label class="rsForm-fieldLabel">Step 4 input</label>
-                    <input class="rsForm-inputText" type="text">
-                  </div>
-                <div class="rsMultiStep-btnRow"><button class="rsBtn">Submit</button></div>
-                </div>
               </div>
             </form>
+
+            <div class="rsSignup-total">
+              Boxes: <span class="rsSignup-boxes">0</span>
+              <span class="rsSignup-total-divider"> | </span>
+              Total: <span class="rsSignup-cost">$0.00</span>
+            </div>
 
           </div>
         </div>
