@@ -1,7 +1,7 @@
 /* global jQuery */
 /* eslint no-param-reassign: ["error", { "props": false }] */
 
-(function($) {
+(function($) { // eslint-disable-line
   $.fn.multiStep = function multiStep(opts) {
     const defaults = {
       form: false,
@@ -40,86 +40,90 @@
       },
     };
 
+    // validation methods
+    const validation = {
+      checkRequired($input) {
+        return {
+          passed: $input.val().trim() !== '',
+        };
+      },
+      checkMinVal($input, min) {
+        return {
+          passed: parseInt($input.val(), 10) >= parseInt(min, 10),
+        };
+      },
+      checkMaxVal($input, max) {
+        return {
+          passed: parseInt($input.val(), 10) <= parseInt(max, 10),
+        };
+      },
+      checkType($input, type) {
+        const types = {
+          email: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi,
+        };
+        return {
+          passed: $input.val().match(types[type]),
+        };
+      },
+      passed($field) {
+        const totalFailed = [];
+        $field.find('input').each(function check() {
+          const $input = $(this);
+          const inputFailed = [];
+          // check for validation message containers
+          let $msgEl = $input.next('.rsMultiStep-validation-message');
+          if ($msgEl.length > 0) {
+            // msg container is there so we need to empty it.
+            $msgEl.html('');
+          } else {
+            // msg container not there yet so inject it
+            $msgEl = $('<div class="rsMultiStep-validation-message"></div>');
+            $msgEl.insertAfter($input);
+          }
+          // check for what to even validate
+          const attr = $input.attr('data-validate');
+          if (attr) {
+            const settings = JSON.parse(attr);
+            // check required
+            if (settings.required && !validation.checkRequired($input).passed) {
+              const msg = 'This value is required';
+              totalFailed.push(msg);
+              inputFailed.push(msg);
+            }
+            // check min values
+            if (!isNaN(settings.min) && !validation.checkMinVal($input, settings.min).passed) {
+              const msg = `This value must be at least ${settings.min}`;
+              totalFailed.push(msg);
+              inputFailed.push(msg);
+            }
+            // check max values
+            if (!isNaN(settings.max) && !validation.checkMaxVal($input, settings.max).passed) {
+              const msg = `This value must not exceed ${settings.max}`;
+              totalFailed.push(msg);
+              inputFailed.push(msg);
+            }
+            // check for types to validate
+            if (settings.type && !validation.checkType($input, settings.type).passed) {
+              const msg = `This value must have a valid ${settings.type} format`;
+              totalFailed.push(msg);
+              inputFailed.push(msg);
+            }
+            // show all errors
+            $msgEl.html(inputFailed.join('. '));
+          }
+        });
+        return totalFailed.length < 1;
+      },
+    };
+
     const $multiStep = $(this);
-    $multiStep.find('.rsMultiStep-step').each(function runSteps() {
+    const $steps = $multiStep.find('.rsMultiStep-step');
+    // add submit button to second step
+    $steps.eq(1).find('.rsMultiStep-btnRow').append('<button class="rsMultiStep-submitBtn">Purchase</button>');
+    $steps.each(function runSteps() {
       const $this = $(this);
       const indexNum = $this.index() + 1;
       const $stepLabel = $this.attr('data-step-label');
-
-      const validation = {
-        checkRequired($input) {
-          return {
-            passed: $input.val().trim() !== '',
-          };
-        },
-        checkMinVal($input, min) {
-          return {
-            passed: parseInt($input.val(), 10) >= parseInt(min, 10),
-          };
-        },
-        checkMaxVal($input, max) {
-          return {
-            passed: parseInt($input.val(), 10) <= parseInt(max, 10),
-          };
-        },
-        checkType($input, type) {
-          const types = {
-            email: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi,
-          };
-          return {
-            passed: $input.val().match(types[type]),
-          };
-        },
-        passed($field) {
-          const totalFailed = [];
-          $field.find('input').each(function check() {
-            const $input = $(this);
-            const inputFailed = [];
-            // check for validation message containers
-            let $msgEl = $input.next('.rsMultiStep-validation-message');
-            if ($msgEl.length > 0) {
-              // msg container is there so we need to empty it.
-              $msgEl.html('');
-            } else {
-              // msg container not there yet so inject it
-              $msgEl = $('<div class="rsMultiStep-validation-message"></div>');
-              $msgEl.insertAfter($input);
-            }
-            // check for what to even validate
-            const attr = $input.attr('data-validate');
-            if (attr) {
-              const settings = JSON.parse(attr);
-              // check required
-              if (settings.required && !validation.checkRequired($input).passed) {
-                const msg = 'This value is required';
-                totalFailed.push(msg);
-                inputFailed.push(msg);
-              }
-              // check min values
-              if (!isNaN(settings.min) && !validation.checkMinVal($input, settings.min).passed) {
-                const msg = `This value must be at least ${settings.min}`;
-                totalFailed.push(msg);
-                inputFailed.push(msg);
-              }
-              // check max values
-              if (!isNaN(settings.max) && !validation.checkMaxVal($input, settings.max).passed) {
-                const msg = `This value must not exceed ${settings.max}`;
-                totalFailed.push(msg);
-                inputFailed.push(msg);
-              }
-              // check for types to validate
-              if (settings.type && !validation.checkType($input, settings.type).passed) {
-                const msg = `This value must have a valid ${settings.type} format`;
-                totalFailed.push(msg);
-                inputFailed.push(msg);
-              }
-              // show all errors
-              $msgEl.html(inputFailed.join('. '));
-            }
-          });
-          return totalFailed.length < 1;
-        },
-      };
 
       $this.parent().prev('.rsMultiStep-progress')
                     .append(`<span class="rsMultiStep-progressStep rsMultiStep-progressStep${indexNum}">
@@ -146,11 +150,11 @@
       }
 
       if ($this.is(':last-child')) {
-        $msRow.prepend($backBtn);
+        // $msRow.prepend($backBtn);
       }
 
       if ($this.is(':not(:first-child)') && $this.is(':not(:last-child)')) {
-        $msRow.prepend($nextBtn);
+        // $msRow.prepend($nextBtn);
         $msRow.prepend($backBtn);
       }
 
@@ -160,7 +164,7 @@
       });
 
       // next click event
-      $this.find('.rsMultiStep-nextBtn').click((e) => {
+      $this.find('.rsMultiStep-nextBtn, .rsMultiStep-submitBtn').click((e) => {
         if (!$this.is(':animated')) {
           e.preventDefault();
 
@@ -175,6 +179,8 @@
             $globalErrors.show().html('You must have at least 1 mail box to proceed.');
             return;
           }
+
+          // TODO check if submit button, then run loader and move to Confirmation
 
           // swap to next step
           $this.css('height', $this.outerHeight());
