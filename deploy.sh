@@ -11,7 +11,7 @@ gulp build-dist
 
 # commit dist
 git add dist
-commit -m "deploying dist"
+git commit -m "deploying dist"
 git push origin master
 
 # push to subtree
