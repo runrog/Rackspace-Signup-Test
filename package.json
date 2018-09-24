@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "gulp",
-    "test": "karma start"
+    "deploy": "chmod 744 deploy.sh && ./deploy.sh",
+    "test": "karma start",
+    "lint": "eslint ./src/js/rs-signup.js"
   },
   "keywords": [
     "node",
