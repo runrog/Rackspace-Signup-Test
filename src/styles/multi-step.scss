@@ -1,6 +1,14 @@
 .rsMultiStep-progress {
   @include clear-fix;
   text-align: center;
+  
+  @media #{$tablet} {
+    text-align: left;
+  }
+  
+  @media #{$mobile} {
+    text-align: left;
+  }
 }
 
 .rsMultiStep-progressStep {
@@ -9,7 +17,15 @@
   text-align: center;
 
   @media #{$mobile} {
+    display: block;
     margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  @media #{$tablet} {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
   }
 }
 
@@ -22,6 +38,7 @@
   height: 40px;
   margin-right: 10px;
   padding: 5px;
+  text-align: center;
   width: 40px;
 }
 

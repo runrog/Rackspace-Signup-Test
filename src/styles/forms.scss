@@ -124,3 +124,13 @@
   font-weight: bold;
 }
 
+.rsForm-required {
+  &:after {
+    color: $danger-red;
+    content: '*';
+    display: inline-block;
+    font-size: 10pt;
+    margin-left: 10px;
+  }
+}
+

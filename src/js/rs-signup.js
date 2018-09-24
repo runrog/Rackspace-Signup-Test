@@ -2,7 +2,7 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 
 (function($) { // eslint-disable-line
-  $.fn.multiStep = function multiStep(opts) {
+  $.fn.rsSignUp = function multiStep(opts) {
     const defaults = {
       form: false,
       validate: false,
@@ -71,12 +71,22 @@
           passed: parseInt($input.val(), 10) <= parseInt(max, 10),
         };
       },
+      initialPassword: '',
+      confirmPassword($input) {
+        return {
+          passed: $input.val() === validation.initialPassword,
+        };
+      },
       checkType($input, type) {
+        const $val = $input.val();
         const types = {
           email: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi,
+          creditcard: /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/,
+          cvv: /^\d{3}$/,
+          date: /^\d{2}\s\/\s\d{2}$/,
         };
         return {
-          passed: $input.val().match(types[type]),
+          passed: $val.match(types[type]),
         };
       },
       passed($field) {
@@ -122,6 +132,17 @@
               totalFailed.push(msg);
               inputFailed.push(msg);
             }
+            // password confirmations
+            if (settings.password) {
+              if (settings.password === 'initial') {
+                validation.initialPassword = $input.val();
+              }
+              if (settings.password === 'match' && !validation.confirmPassword($input).passed) {
+                const msg = 'Your passwords do not match';
+                totalFailed.push(msg);
+                inputFailed.push(msg);
+              }
+            }
             // show all errors
             $msgEl.html(inputFailed.join('. '));
           }
@@ -163,12 +184,7 @@
         $msRow.prepend($nextBtn);
       }
 
-      if ($this.is(':last-child')) {
-        // $msRow.prepend($backBtn);
-      }
-
       if ($this.is(':not(:first-child)') && $this.is(':not(:last-child)')) {
-        // $msRow.prepend($nextBtn);
         $msRow.prepend($backBtn);
       }
 
