@@ -66,6 +66,11 @@
   float: left;
 }
 
+.rsMultiStep-submitBtn {
+  @include large-btn($cta-green);
+  float: right;
+}
+
 .rsMultiStep-validation-message {
   color: $danger-red;
   font-size: 11pt;

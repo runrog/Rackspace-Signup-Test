@@ -26,17 +26,38 @@
                       <div class="rsForm-fieldContainer">
                         <label class="rsForm-fieldLabel">Rackspace Email</label>
                         <span class="rsForm-inputHint">$2.00</span>
-                        <input class="rsForm-inputText" name="rs-add-quantity" data-cost="200" data-validate='{ "min": 0, "max": 50 }' type="number" value="0">
+                        <input
+                          class="rsForm-inputText"
+                          name="rs-add-quantity"
+                          data-cost="200"
+                          data-validate='{ "min": 0, "max": 50 }'
+                          data-product="email"
+                          type="number"
+                          value="0">
                       </div>
                       <div class="rsForm-fieldContainer">
                         <label class="rsForm-fieldLabel">Rackspace Email Plus</label>
                         <span class="rsForm-inputHint">$3.50</span>
-                        <input class="rsForm-inputText" name="rs-add-quantity" data-cost="350" data-validate='{ "min": 0, "max": 50 }' type="number" value="0">
+                        <input
+                          class="rsForm-inputText"
+                          name="rs-add-quantity"
+                          data-cost="350"
+                          data-validate='{ "min": 0, "max": 50 }'
+                          data-product="emailPlus"
+                          type="number"
+                          value="0">
                       </div>
                       <div class="rsForm-fieldContainer">
                         <label class="rsForm-fieldLabel">Microsoft Exchange</label>
                         <span class="rsForm-inputHint">$7.99</span>
-                        <input class="rsForm-inputText" name="rs-add-quantity" data-cost="799" data-validate='{ "min": 0, "max": 50 }' type="number" value="0">
+                        <input
+                          class="rsForm-inputText"
+                          name="rs-add-quantity" 
+                          data-cost="799"
+                          data-validate='{ "min": 0, "max": 50 }'
+                          data-product="exchange"
+                          type="number"
+                          value="0">
                       </div>
                     </div>
                     <div class="rsForm-col-6"></div>
@@ -45,78 +66,90 @@
                   <div class="rsMultiStep-btnRow"></div>
                 </div>
                 <div class="rsMultiStep-step" data-step-label="Your Information">
-                  <div class="rsForm-col-6">
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">First Name</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                  <div class="rsForm-row text-center">
+                    <img class="rsForm-loader" src="<%- path %>images/tail-spin.svg" alt="rs-loader" />
+                  </div>
+                  <div class="rsForm-submitStep">
+                    <div class="rsForm-col-6">
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">First Name</label>
+                        <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Last Name</label>
+                        <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Email</label>
+                        <input class="rsForm-inputText" data-validate='{ "required": true, "type": "email" }' type="text">
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Password</label>
+                        <input class="rsForm-inputText" data-validate='{ "required": true }' type="password">
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Confirm Password</label>
+                        <input class="rsForm-inputText" data-validate='{ "required": true }' type="password">
+                      </div>
                     </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Last Name</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
-                    </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Email</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true, "type": "email" }' type="text">
-                    </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Password</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="password">
-                    </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Confirm Password</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="password">
+                    <div class="rsForm-col-6">
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Credit Card Number</label>
+                        <input class="rsForm-inputText" data-inputmask="'mask': '9999 9999 9999 9999'" data-validate='{ "required": true }' type="text">
+                      </div>
+                      <div class="rsForm-row">
+                        <div class="rsForm-col-9">
+                          <div class="rsForm-fieldContainer">
+                            <label class="rsForm-fieldLabel">Card Expiration</label>
+                            <input class="rsForm-inputText" data-inputmask="'mask': '99 / 99'" placeholder="mm / yy" data-validate='{ "required": true }' type="text">
+                          </div>
+                        </div>
+                        <div class="rsForm-col-3">
+                          <div class="rsForm-fieldContainer">
+                            <label class="rsForm-fieldLabel">CVV</label>
+                            <input class="rsForm-inputText" data-inputmask="'mask': '999'" data-validate='{ "required": true }' type="text">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="rsForm-fieldContainer">
+                        <label class="rsForm-fieldLabel">Billing Address</label>
+                        <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                      </div>
+                      <div class="rsForm-row">
+                        <div class="rsForm-col-9">
+                          <div class="rsForm-fieldContainer">
+                            <label class="rsForm-fieldLabel">City</label>
+                            <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
+                          </div>
+                        </div>
+                        <div class="rsForm-col-3">
+                          <div class="rsForm-fieldContainer">
+                            <label class="rsForm-fieldLabel">State</label>
+                            <input class="rsForm-inputText" data-inputmask="'mask': 'AA'" data-validate='{ "required": true }' type="text">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="rsForm-row">
+                        <div class="rsForm-col-6">
+                          <div class="rsForm-fieldContainer">
+                            <label class="rsForm-fieldLabel">Zip Code</label>
+                            <input class="rsForm-inputText" data-inputmask="'mask': '99999'" data-validate='{ "required": true }' type="text">
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="rsForm-col-6">
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Credit Card Number</label>
-                      <input class="rsForm-inputText" data-inputmask="'mask': '9999 9999 9999 9999'" data-validate='{ "required": true }' type="text">
-                    </div>
-                    <div class="rsForm-row">
-                      <div class="rsForm-col-9">
-                        <div class="rsForm-fieldContainer">
-                          <label class="rsForm-fieldLabel">Card Expiration</label>
-                          <input class="rsForm-inputText" data-inputmask="'mask': '99 / 99'" placeholder="mm / yy" data-validate='{ "required": true }' type="text">
-                        </div>
-                      </div>
-                      <div class="rsForm-col-3">
-                        <div class="rsForm-fieldContainer">
-                          <label class="rsForm-fieldLabel">CVV</label>
-                          <input class="rsForm-inputText" data-inputmask="'mask': '999'" data-validate='{ "required": true }' type="text">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="rsForm-fieldContainer">
-                      <label class="rsForm-fieldLabel">Billing Address</label>
-                      <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
-                    </div>
-                    <div class="rsForm-row">
-                      <div class="rsForm-col-9">
-                        <div class="rsForm-fieldContainer">
-                          <label class="rsForm-fieldLabel">City</label>
-                          <input class="rsForm-inputText" data-validate='{ "required": true }' type="text">
-                        </div>
-                      </div>
-                      <div class="rsForm-col-3">
-                        <div class="rsForm-fieldContainer">
-                          <label class="rsForm-fieldLabel">State</label>
-                          <input class="rsForm-inputText" data-inputmask="'mask': 'AA'" data-validate='{ "required": true }' type="text">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="rsForm-row">
-                      <div class="rsForm-col-6">
-                        <div class="rsForm-fieldContainer">
-                          <label class="rsForm-fieldLabel">Zip Code</label>
-                          <input class="rsForm-inputText" data-inputmask="'mask': '99999'" data-validate='{ "required": true }' type="text">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="rsForm-global-errors rsMultiStep-validation-message"></div>
                   <div class="rsMultiStep-btnRow"></div>
                 </div>
                 <div class="rsMultiStep-step" data-step-label="Confirmation">
-                  <!-- TODO create success message -->
+                  <span class="rsForm-success-check"></span>
+                  <div class="rsForm-row centered"><h3>Thank your for your purchase!</h3></div>
+                  <div class="rsForm-summary">
+                    <span class="rsForm-summary-title">Order Summary</span>
+                    <div class="rsForm-summary-products"></div>
+                    <div class="rsForm-summary-total">Total: <span id="summary-total"></span></div>
+                  </div>
                 </div>
               </div>
             </form>

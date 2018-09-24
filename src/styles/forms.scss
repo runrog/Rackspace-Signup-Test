@@ -67,3 +67,60 @@
   @include column(25%);
 }
 
+.rsForm-loader {
+  display: none;
+  height: 120px;
+}
+
+.rsForm-success-check {
+  color: $cta-green;
+  display: block;
+  font-size: 48pt;
+  text-align: center;
+  
+  &:before {
+    content: '\e807';
+    font-family: 'rswebfonts';
+  }
+}
+
+.rsForm-summary {
+  background-color: $white;
+  border: 1px solid #afafaf;
+  margin: 0 auto 20px;
+  padding: 20px;
+  width: 50%;
+  
+  @media #{$mobile} {
+    width: 100%;
+  }
+  
+  @media #{$tablet} {
+    width: 100%;
+  }
+}
+
+.rsForm-summary-title {
+  border-bottom: 1px solid #afafaf;
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 0;
+}
+
+.rsForm-summary-quantity {
+  display: block;
+  margin-bottom: 10px;
+  word-spacing: 10px;
+}
+
+.rsForm-summary-products {
+  border-bottom: 1px solid #afafaf;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.rsForm-summary-total {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
