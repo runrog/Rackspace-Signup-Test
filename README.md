@@ -1,6 +1,6 @@
 # Rackspace Signup Test
 
-### [Demo](http://rogeravalos.com/Rackspace-Sign…)
+### [Demo](http://rogeravalos.com/Rackspace-Signup-Test/)
 
 ### Setup
 Install dependencies
