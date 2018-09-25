@@ -6,6 +6,9 @@ set -e
 # lint js first
 npm run lint
 
+# run tests
+npm run test
+
 # build dist from scratch
 gulp build-dist
 

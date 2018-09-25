@@ -1,11 +1,11 @@
 .rsMultiStep-progress {
   @include clear-fix;
   text-align: center;
-  
+
   @media #{$tablet} {
     text-align: left;
   }
-  
+
   @media #{$mobile} {
     text-align: left;
   }
@@ -21,7 +21,7 @@
     margin-bottom: 10px;
     text-align: left;
   }
-  
+
   @media #{$tablet} {
     display: block;
     margin-bottom: 10px;
@@ -60,6 +60,10 @@
   background-color: $off-white;
   display: none;
   padding: 30px;
+}
+
+.rsMultiStep-step-error {
+  background-color: rgba($danger-red, .075);
 }
 
 .rsMultiStep-stepActive {
