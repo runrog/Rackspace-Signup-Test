@@ -59,30 +59,29 @@
 
     // validation methods
     var validation = {
-      checkRequired: function checkRequired($input) {
+      checkRequired: function checkRequired(val) {
         return {
-          passed: $input.val().trim() !== ''
+          passed: val.trim() !== ''
         };
       },
-      checkMinVal: function checkMinVal($input, min) {
+      checkMinVal: function checkMinVal(val, min) {
         return {
-          passed: parseInt($input.val(), 10) >= parseInt(min, 10)
+          passed: parseInt(val, 10) >= parseInt(min, 10)
         };
       },
-      checkMaxVal: function checkMaxVal($input, max) {
+      checkMaxVal: function checkMaxVal(val, max) {
         return {
-          passed: parseInt($input.val(), 10) <= parseInt(max, 10)
+          passed: parseInt(val, 10) <= parseInt(max, 10)
         };
       },
 
       initialPassword: '',
-      confirmPassword: function confirmPassword($input) {
+      confirmPassword: function confirmPassword(val, initial) {
         return {
-          passed: $input.val() === validation.initialPassword
+          passed: val === initial
         };
       },
-      checkType: function checkType($input, type) {
-        var $val = $input.val();
+      checkType: function checkType(val, type) {
         var types = {
           email: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi,
           creditcard: /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/,
@@ -90,7 +89,7 @@
           date: /^\d{2}\s\/\s\d{2}$/
         };
         return {
-          passed: $val.match(types[type])
+          passed: val.match(types[type])
         };
       },
       passed: function passed($field) {
@@ -110,28 +109,29 @@
           }
           // check for what to even validate
           var attr = $input.attr('data-validate');
+          var val = $input.val();
           if (attr) {
             var settings = JSON.parse(attr);
             // check required
-            if (settings.required && !validation.checkRequired($input).passed) {
+            if (settings.required && !validation.checkRequired(val).passed) {
               var msg = 'This value is required';
               totalFailed.push(msg);
               inputFailed.push(msg);
             }
             // check min values
-            if (!isNaN(settings.min) && !validation.checkMinVal($input, settings.min).passed) {
+            if (!isNaN(settings.min) && !validation.checkMinVal(val, settings.min).passed) {
               var _msg = 'This value must be at least ' + settings.min;
               totalFailed.push(_msg);
               inputFailed.push(_msg);
             }
             // check max values
-            if (!isNaN(settings.max) && !validation.checkMaxVal($input, settings.max).passed) {
+            if (!isNaN(settings.max) && !validation.checkMaxVal(val, settings.max).passed) {
               var _msg2 = 'This value must not exceed ' + settings.max;
               totalFailed.push(_msg2);
               inputFailed.push(_msg2);
             }
             // check for types to validate
-            if (settings.type && !validation.checkType($input, settings.type).passed) {
+            if (settings.type && !validation.checkType(val, settings.type).passed) {
               var _msg3 = 'This value must have a valid ' + settings.type + ' format';
               totalFailed.push(_msg3);
               inputFailed.push(_msg3);
@@ -139,9 +139,9 @@
             // password confirmations
             if (settings.password) {
               if (settings.password === 'initial') {
-                validation.initialPassword = $input.val();
+                validation.initialPassword = val;
               }
-              if (settings.password === 'match' && !validation.confirmPassword($input).passed) {
+              if (settings.password === 'match' && !validation.confirmPassword(val, validation.initialPassword).passed) {
                 var _msg4 = 'Your passwords do not match';
                 totalFailed.push(_msg4);
                 inputFailed.push(_msg4);
@@ -221,13 +221,18 @@
         $msProgress.find('.rsMultiStep-progressStep' + indexNum + ' .rsMultiStep-progressStep-num').removeClass('rsMultiStep-progressStep-numActive');
       };
 
+      var $insertedBackBtn = $this.find('.rsMultiStep-backBtn');
+      var $insertedNextBtn = $this.find('.rsMultiStep-nextBtn, .rsMultiStep-submitBtn');
+
       // next click event
-      $this.find('.rsMultiStep-nextBtn, .rsMultiStep-submitBtn').click(function (e) {
+      $insertedNextBtn.click(function (e) {
         if (!$this.is(':animated')) {
           e.preventDefault();
+          $this.removeClass('rsMultiStep-step-error');
 
           // don't change steps unless validation passes
           if (options.form && options.validate && !validation.passed($this)) {
+            $this.addClass('rsMultiStep-step-error');
             return;
           }
 
@@ -235,6 +240,7 @@
           $globalErrors.hide();
           if (totalQuantity <= 0) {
             $globalErrors.show().html('You must have at least 1 mail box to proceed.');
+            $this.addClass('rsMultiStep-step-error');
             return;
           }
 
@@ -243,6 +249,8 @@
             var testCORS = 'https://cors-anywhere.herokuapp.com/';
             $loader.show();
             $submitStep.hide();
+            $insertedBackBtn.hide();
+            $insertedNextBtn.hide();
             $.ajax({
               type: 'POST',
               url: testCORS + 'https://postman-echo.com/post',
@@ -255,11 +263,14 @@
                 moveNext();
               },
               error: function error() {
+                $this.addClass('rsMultiStep-step-error');
                 $globalErrors.show().html('There was an error. Please try again!');
               },
               complete: function complete() {
                 $loader.hide();
                 $submitStep.show();
+                $insertedBackBtn.show();
+                $insertedNextBtn.show();
               }
             });
           } else {
@@ -269,13 +280,14 @@
       });
 
       // back click event
-      $this.find('.rsMultiStep-backBtn').click(function (e) {
+      $insertedBackBtn.click(function (e) {
         if (!$this.prev().is(':animated')) {
           e.preventDefault();
           moveBack();
         }
       });
     });
+    $.fn.rsSignUp.test = $.extend({}, methods, validation);
     return this;
   };
 })(jQuery);
