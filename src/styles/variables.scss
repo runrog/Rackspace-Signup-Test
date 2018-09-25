@@ -1,9 +1,9 @@
-$baseColor: #c40022;
-$black: #000000;
-$white: #ffffff;
+$base-color: #c40022;
+$black: #000;
+$white: #fff;
 $off-white: #f3f3f3;
-$fadeBase: rgba($baseColor, 0.2);
-$darkenBase: darken($baseColor, 20%);
+$fade-base: rgba($base-color, .2);
+$darken-base: darken($base-color, 20%);
 $danger-red: #e42626;
 $secondary-blue: #708d90;
 $cta-green: #5aaa28;

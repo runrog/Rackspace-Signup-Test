@@ -33,7 +33,7 @@
   background-color: transparent;
   border: 2px solid #cecece;
   border-radius: 50%;
-  color: rgba($black, 0.6);
+  color: rgba($black, .6);
   display: inline-block;
   height: 40px;
   margin-right: 10px;
@@ -43,9 +43,9 @@
 }
 
 .rsMultiStep-progressStep-numActive {
-  background-color: $baseColor;
-  border: 2px solid $baseColor;
-  color: white;
+  background-color: $base-color;
+  border: 2px solid $base-color;
+  color: $white;
 }
 
 .rsMultiStep {
