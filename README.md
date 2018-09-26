@@ -35,6 +35,8 @@ npm run lint:sass
 ```
 ---
 ### Deploying
+
+##### Manually
 This script will run a series of tasks to create a static version of the app for deployment to github pages.
 ```
 npm run deploy
@@ -46,7 +48,7 @@ This project uses EJS for templating which gets rendered at runtime via node (``
 
 ---
 ### Automation
-Gulp is setup to automate these tasks by default on ```npm start```. Below is a breakdown of the individual items in the event they need to be ran manually.
+Gulp is setup to automate these tasks by default on ```npm start``` by watching files for changes. Below is a breakdown of the individual tasks in the event they need to be ran manually.
 
 ##### Fetching Zoolander
 This task fetches the major components from Zoolander and adds them to this project's ```dist/``` folder.
