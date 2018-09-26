@@ -41,6 +41,8 @@ This script will run a series of tasks to create a static version of the app for
 ```
 npm run deploy
 ```
+##### Travis
+Currently Travis runs linting and testing on pull requests. It is not setup to deploy just yet.
 
 ---
 ### Templating
