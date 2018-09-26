@@ -8,7 +8,8 @@
     "deploy": "chmod 744 deploy.sh && ./deploy.sh",
     "test": "karma start",
     "lint:js": "eslint ./src/js/rs-signup.js",
-    "lint:sass": "sass-lint -v"
+    "lint:sass": "sass-lint -v",
+    "travis": "chmod 744 travis.sh && ./travis.sh"
   },
   "keywords": [
     "node",
