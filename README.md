@@ -1,5 +1,7 @@
 # Rackspace Signup Test
 
+[![Build Status](https://travis-ci.com/runrog/Rackspace-Signup-Test.svg?branch=master)](https://travis-ci.com/runrog/Rackspace-Signup-Test)
+
 ### [Demo](http://rogeravalos.com/Rackspace-Signup-Test/)
 
 ### Setup
